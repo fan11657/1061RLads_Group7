@@ -1,0 +1,18 @@
+Analysis_text
+
+```{r president.seg, echo=TRUE}
+Sys.setlocale("LC_ALL", "Chinese (Traditional)_Taiwan.950")
+Sys.getlocale()
+
+library(jiebaR)
+national <- readLines("analysis_text.txt", encoding = "UTF-8")
+eng <- worker()
+words <- segment(national, eng)
+abc <- data.frame(table(words))
+final <- abc[with(abc, order(-Freq)), ]
+rownames(final) <- NULL
+print(final)
+```
+
+問題意識、分析方法、可能遇到的技術問題、理論問題、倫理問題等。
+在面對大量文字訊息的資料時，可能會因為文字量的多寡而影響閱讀時的專注力進而忽略了重要的資訊或忽略了數行的訊息。在運用R對文本詞彙的斷詞分析中，可以抓出重要的詞彙並且忽略無關緊要的文字。但是斷詞的過程中可能會遇到一些斷錯詞的情況，那麼也會進而使得重要訊息被忽略。
