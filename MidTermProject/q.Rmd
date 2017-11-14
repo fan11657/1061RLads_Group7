@@ -1,0 +1,105 @@
+R語言與資料科學導論——加分報告（第7組）
+=====================================
+
+```{r}
+library(httr)
+library(Rfacebook)
+```
+
+
+```{r}
+token <- "EAACEdEose0cBAM0IjvoZBEunnTuDZBPZBIER1AP5ff9mxvuK6zNBZAziFG5Uq5J0CHM3jc8vyKlBegZCflTjftQJ4S3ecIHvqZAtaBuKlnF2mTnNozQhG327AXWvHZAqRnITGRKjpC6ymelM04WV0UMRNGoxSPwq3AhfGJBjnU2JxmybjMO0AnZARZCrUCaPT29Y9tHSBjar5tAZDZD"
+```
+
+```{r}
+Sys.setlocale("LC_ALL", "Chinese (Traditional)_Taiwan.950")
+Sys.getlocale()
+```
+
+
+```{r}
+page.id <- "hateNTU"
+page <- getPage(page.id, token, n = 300)
+str(page)
+```
+
+#針對黑特台大近期po文資料贊數與分享數及評論數進行分析
+
+```{r}
+#贊數最高與最低
+page1 <- as.data.frame(page)
+pagewithlike <- page1[with(page1, order(-likes_count)), ]
+pagewithlike$message <- gsub("\\\n","",pagewithlike$message)
+pagewithlike$message <- gsub("\\NTUHate[0~9]+","",pagewithlike$message)
+
+top.post <- head(pagewithlike, 10)
+low.post <- tail(pagewithlike, 10)
+top.post
+low.post
+
+
+
+#分享數最高與最低
+page2 <- as.data.frame(page)
+pagewithshare <- page1[with(page2, order(-shares_count)), ]
+pagewithshare$message <- gsub("\\\n","",pagewithshare$message)
+
+topshare.post <- head(pagewithshare, 10)
+lowshare.post <- tail(pagewithshare, 10)
+topshare.post
+lowshare.post
+
+
+
+#評論數最高與最低
+page2 <- as.data.frame(page)
+pagewithcomments <- page1[with(page2, order(-shares_count)), ]
+pagewithcomments$message <- gsub("\\\n","",pagewithcomments$message)
+
+topcomments.post <- head(pagewithcomments, 10)
+lowcomments.post <- tail(pagewithcomments, 10)
+topcomments.post
+lowcomments.post
+```
+
+```{r}
+#贊數與評論數關係
+cor(page$likes_count,page$comments_count)
+model1 <- glm(likes_count ~ comments_count, data = page)
+summary(model1)
+plot(page$likes_count,page$comments_count)
+
+
+#贊數與分享數關係
+cor(page$likes_count,page$shares_count)
+model2 <- glm(likes_count ~ shares_count, data = page)
+summary(model2)
+plot(page$likes_count,page$shares_count)
+
+
+#贊數對評論及分享的關係
+lm(likes_count~shares_count + comments_count, page)
+mod <- glm(cbind(shares_count, comments_count) ~ likes_count, data = page, family = binomial())
+summary(mod)
+plot(mod)
+```
+
+#針對黑特台大近期po文最高贊數之贊戶姓氏進行分析
+
+```{r}
+library(wordcloud2)
+
+#最高贊數po文按贊之姓氏前100
+toppost <- page[which.max(page$likes_count), ]
+post <- getPost(toppost$id, token, n = 1000, likes =  TRUE, comments = FALSE)
+users <- getUsers(post$likes$from_id, token)
+lol <- data.frame(head(sort(table(users$last_name), decreasing = TRUE),100))
+wordcloud2(lol, size = 1,shape = 'star')
+```
+
+##可與目前百家姓排名進行對比
+![](http://img1.voc.com.cn/UpLoadFile/2013/04/13/201304131513572586.jpg)
+
+
+
+
