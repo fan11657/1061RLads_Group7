@@ -1,0 +1,439 @@
+##團體作業：總統的語言行為
+
+```{r}
+library(tm)
+```
+
+
+美國總統
+```{r}
+a1 <- readLines("1789-Washington.txt")
+a2 <- readLines("1793-Washington.txt")
+a3 <- readLines("1797-Adams.txt")
+a4 <- readLines("1801-Jefferson.txt")
+a5 <- readLines("1805-Jefferson.txt")
+a6 <- readLines("1809-Madison.txt")
+a7 <- readLines("1813-Madison.txt")
+a8 <- readLines("1817-Monroe.txt")
+a9 <- readLines("1821-Monroe.txt")
+a10 <- readLines("1825-Adams.txt")
+a11 <- readLines("1829-Jackson.txt")
+a12 <- readLines("1833-Jackson.txt")
+a13 <- readLines("1837-VanBuren.txt")
+a14 <- readLines("1841-Harrison.txt")
+a15 <- readLines("1845-Polk.txt")
+a16 <- readLines("1849-Taylor.txt")
+a17 <- readLines("1853-Pierce.txt")
+a18 <- readLines("1857-Buchanan.txt")
+a19 <- readLines("1861-Lincoln.txt")
+a20 <- readLines("1865-Lincoln.txt")
+a21 <- readLines("1869-Grant.txt")
+a22 <- readLines("1873-Grant.txt")
+a23 <- readLines("1877-Hayes.txt")
+a24 <- readLines("1881-Garfield.txt")
+a25 <- readLines("1885-Cleveland.txt")
+a26 <- readLines("1889-Harrison.txt")
+a27 <- readLines("1893-Cleveland.txt")
+a28 <- readLines("1897-McKinley.txt")
+a29 <- readLines("1901-McKinley.txt")
+a30 <- readLines("1905-Roosevelt.txt")
+a31 <- readLines("1909-Taft.txt")
+a32 <- readLines("1913-Wilson.txt")
+a33 <- readLines("1917-Wilson.txt")
+a34 <- readLines("1921-Harding.txt")
+a35 <- readLines("1925-Coolidge.txt")
+a36 <- readLines("1929-Hoover.txt")
+a37 <- readLines("1933-Roosevelt.txt")
+a38 <- readLines("1937-Roosevelt.txt")
+a39 <- readLines("1941-Roosevelt.txt")
+a40 <- readLines("1945-Roosevelt.txt")
+a41 <- readLines("1949-Truman.txt")
+a42 <- readLines("1953-Eisenhower.txt")
+a43 <- readLines("1957-Eisenhower.txt")
+a44 <- readLines("1961-Kennedy.txt")
+a45 <- readLines("1965-Johnson.txt")
+a46 <- readLines("1969-Nixon.txt")
+a47 <- readLines("1973-Nixon.txt")
+a48 <- readLines("1977-Carter.txt")
+a49 <- readLines("1981-Reagan.txt")
+a50 <- readLines("1985-Reagan.txt")
+a51 <- readLines("1989-Bush.txt")
+a52 <- readLines("1993-Clinton.txt")
+a53 <- readLines("1997-Clinton.txt")
+a54 <- readLines("2001-Bush.txt")
+a55 <- readLines("2005-Bush.txt")
+a56 <- readLines("2009-Obama.txt")
+a57 <- readLines("2013-Obama.txt")
+```
+
+Washington
+```{r}
+vc <- VCorpus(VectorSource(c(a1,a2)))
+vc <- tm_map(vc, content_transformer(tolower))
+vc <- tm_map(vc, stemDocument)
+vc <- tm_map(vc, removeWords, stopwords("english"))
+dtm <- DocumentTermMatrix(vc)
+x0 <- sum(dtm)/2
+y0 <- ncol(dtm)/2
+```
+Adams
+```{r}
+vc1 <- VCorpus(VectorSource(c(a3,a10)))
+vc1 <- tm_map(vc1, content_transformer(tolower))
+vc1 <- tm_map(vc1, stemDocument)
+vc1 <- tm_map(vc1, removeWords, stopwords("english"))
+dtm1 <- DocumentTermMatrix(vc1)
+x1 <- sum(dtm1)/2
+y1 <- ncol(dtm1)/2
+```
+Jefferson
+```{r}
+vc2 <- VCorpus(VectorSource(c(a4,a5)))
+vc2 <- tm_map(vc2, content_transformer(tolower))
+vc2 <- tm_map(vc2, stemDocument)
+vc2 <- tm_map(vc2, removeWords, stopwords("english"))
+dtm2 <- DocumentTermMatrix(vc2)
+x2 <- sum(dtm2)/2
+y2 <- ncol(dtm2)/2
+```
+Madison
+```{r}
+vc3 <- VCorpus(VectorSource(c(a6,a7)))
+vc3 <- tm_map(vc3, content_transformer(tolower))
+vc3 <- tm_map(vc3, stemDocument)
+vc3 <- tm_map(vc3, removeWords, stopwords("english"))
+dtm3 <- DocumentTermMatrix(vc3)
+x3 <- sum(dtm3)/2
+y3 <- ncol(dtm3)/2
+```
+Monroe
+```{r}
+vc4 <- VCorpus(VectorSource(c(a8,a9)))
+vc4 <- tm_map(vc4, content_transformer(tolower))
+vc4 <- tm_map(vc4, stemDocument)
+vc4 <- tm_map(vc4, removeWords, stopwords("english"))
+dtm4 <- DocumentTermMatrix(vc4)
+x4 <- sum(dtm4)/2
+y4 <- ncol(dtm4)/2
+```
+Jackson
+```{r}
+vc5 <- VCorpus(VectorSource(c(a11,a12)))
+vc5 <- tm_map(vc5, content_transformer(tolower))
+vc5 <- tm_map(vc5, stemDocument)
+vc5 <- tm_map(vc5, removeWords, stopwords("english"))
+dtm5 <- DocumentTermMatrix(vc5)
+x5 <- sum(dtm5)/2
+y5 <- ncol(dtm5)/2
+```
+VanBuren
+```{r}
+vc6 <- VCorpus(VectorSource(c(a13)))
+vc6 <- tm_map(vc6, content_transformer(tolower))
+vc6 <- tm_map(vc6, stemDocument)
+vc6 <- tm_map(vc6, removeWords, stopwords("english"))
+dtm6 <- DocumentTermMatrix(vc6)
+x6 <- sum(dtm6)
+y6 <- ncol(dtm6)
+```
+Harrison
+```{r}
+vc7 <- VCorpus(VectorSource(c(a14)))
+vc7 <- tm_map(vc7, content_transformer(tolower))
+vc7 <- tm_map(vc7, stemDocument)
+vc7 <- tm_map(vc7, removeWords, stopwords("english"))
+dtm7 <- DocumentTermMatrix(vc7)
+x7 <- sum(dtm7)
+y7 <- ncol(dtm7)
+```
+Polk
+```{r}
+vc8 <- VCorpus(VectorSource(c(a15)))
+vc8 <- tm_map(vc8, content_transformer(tolower))
+vc8 <- tm_map(vc8, stemDocument)
+vc8 <- tm_map(vc8, removeWords, stopwords("english"))
+dtm8 <- DocumentTermMatrix(vc8)
+x8 <- sum(dtm8)
+y8 <- ncol(dtm8)
+```
+Taylor
+```{r}
+vc9 <- VCorpus(VectorSource(c(a16)))
+vc9 <- tm_map(vc9, content_transformer(tolower))
+vc9 <- tm_map(vc9, stemDocument)
+vc9 <- tm_map(vc9, removeWords, stopwords("english"))
+dtm9 <- DocumentTermMatrix(vc9)
+x9 <- sum(dtm9)
+y9 <- ncol(dtm9)
+```
+Pierce
+```{r}
+vc10 <- VCorpus(VectorSource(c(a17)))
+vc10 <- tm_map(vc10, content_transformer(tolower))
+vc10 <- tm_map(vc10, stemDocument)
+vc10 <- tm_map(vc10, removeWords, stopwords("english"))
+dtm10 <- DocumentTermMatrix(vc10)
+x10 <- sum(dtm10)
+y10 <- ncol(dtm10)
+```
+Buchanan
+```{r}
+vc11 <- VCorpus(VectorSource(c(a18)))
+vc11 <- tm_map(vc11, content_transformer(tolower))
+vc11 <- tm_map(vc11, stemDocument)
+vc11 <- tm_map(vc11, removeWords, stopwords("english"))
+dtm11 <- DocumentTermMatrix(vc11)
+x11 <- sum(dtm11)
+y11 <- ncol(dtm11)
+```
+Lincoln
+```{r}
+vc12 <- VCorpus(VectorSource(c(a19,a20)))
+vc12 <- tm_map(vc12, content_transformer(tolower))
+vc12 <- tm_map(vc12, stemDocument)
+vc12 <- tm_map(vc12, removeWords, stopwords("english"))
+dtm12 <- DocumentTermMatrix(vc12)
+x12 <- sum(dtm12)/2
+y12 <- ncol(dtm12)/2
+```
+Grant
+```{r}
+vc13 <- VCorpus(VectorSource(c(a21,a22)))
+vc13 <- tm_map(vc13, content_transformer(tolower))
+vc13 <- tm_map(vc13, stemDocument)
+vc13 <- tm_map(vc13, removeWords, stopwords("english"))
+dtm13 <- DocumentTermMatrix(vc13)
+x13 <- sum(dtm13)/2
+y13 <- ncol(dtm13)/2
+```
+Hayes
+```{r}
+vc14 <- VCorpus(VectorSource(c(a23)))
+vc14 <- tm_map(vc14, content_transformer(tolower))
+vc14 <- tm_map(vc14, stemDocument)
+vc14 <- tm_map(vc14, removeWords, stopwords("english"))
+dtm14 <- DocumentTermMatrix(vc14)
+x14 <- sum(dtm14)
+y14 <- ncol(dtm14)
+```
+Garfield
+```{r}
+vc15 <- VCorpus(VectorSource(c(a24)))
+vc15 <- tm_map(vc15, content_transformer(tolower))
+vc15 <- tm_map(vc15, stemDocument)
+vc15 <- tm_map(vc15, removeWords, stopwords("english"))
+dtm15 <- DocumentTermMatrix(vc15)
+x15 <- sum(dtm15)
+y15 <- ncol(dtm15)
+```
+Cleveland
+```{r}
+vc16 <- VCorpus(VectorSource(c(a25,a27)))
+vc16 <- tm_map(vc16, content_transformer(tolower))
+vc16 <- tm_map(vc16, stemDocument)
+vc16 <- tm_map(vc16, removeWords, stopwords("english"))
+dtm16 <- DocumentTermMatrix(vc16)
+x16 <- sum(dtm16)/2
+y16 <- ncol(dtm16)/2
+```
+Harrison
+```{r}
+vc17 <- VCorpus(VectorSource(c(a26)))
+vc17 <- tm_map(vc17, content_transformer(tolower))
+vc17 <- tm_map(vc17, stemDocument)
+vc17 <- tm_map(vc17, removeWords, stopwords("english"))
+dtm17 <- DocumentTermMatrix(vc17)
+x17 <- sum(dtm17)
+y17 <- ncol(dtm17)
+```
+McKinley
+```{r}
+vc18 <- VCorpus(VectorSource(c(a28,a29)))
+vc18 <- tm_map(vc18, content_transformer(tolower))
+vc18 <- tm_map(vc18, stemDocument)
+vc18 <- tm_map(vc18, removeWords, stopwords("english"))
+dtm18 <- DocumentTermMatrix(vc18)
+x18 <- sum(dtm18)/2
+y18 <- ncol(dtm18)/2
+```
+Roosevelt
+```{r}
+vc19 <- VCorpus(VectorSource(c(a30,a37,a38,a39,a40)))
+vc19 <- tm_map(vc19, content_transformer(tolower))
+vc19 <- tm_map(vc19, stemDocument)
+vc19 <- tm_map(vc19, removeWords, stopwords("english"))
+dtm19 <- DocumentTermMatrix(vc19)
+x19 <- sum(dtm19)/5
+y19 <- ncol(dtm19)/5
+```
+Talf
+```{r}
+vc20 <- VCorpus(VectorSource(c(a31)))
+vc20 <- tm_map(vc20, content_transformer(tolower))
+vc20 <- tm_map(vc20, stemDocument)
+vc20 <- tm_map(vc20, removeWords, stopwords("english"))
+dtm20 <- DocumentTermMatrix(vc20)
+x20 <- sum(dtm20)
+y20 <- ncol(dtm20)
+```
+Wilson
+```{r}
+vc21 <- VCorpus(VectorSource(c(a32,a33)))
+vc21 <- tm_map(vc21, content_transformer(tolower))
+vc21 <- tm_map(vc21, stemDocument)
+vc21 <- tm_map(vc21, removeWords, stopwords("english"))
+dtm21 <- DocumentTermMatrix(vc21)
+x21 <- sum(dtm21)/2
+y21 <- ncol(dtm21)/2
+```
+Harding
+```{r}
+vc22 <- VCorpus(VectorSource(c(a34)))
+vc22 <- tm_map(vc22, content_transformer(tolower))
+vc22 <- tm_map(vc22, stemDocument)
+vc22 <- tm_map(vc22, removeWords, stopwords("english"))
+dtm22 <- DocumentTermMatrix(vc22)
+x22 <- sum(dtm22)
+y22 <- ncol(dtm22)
+```
+Coolidge
+```{r}
+vc23 <- VCorpus(VectorSource(c(a35)))
+vc23 <- tm_map(vc23, content_transformer(tolower))
+vc23 <- tm_map(vc23, stemDocument)
+vc23 <- tm_map(vc23, removeWords, stopwords("english"))
+dtm23 <- DocumentTermMatrix(vc23)
+x23 <-sum(dtm23)
+y23 <- ncol(dtm23)
+```
+Hoover
+```{r}
+vc24 <- VCorpus(VectorSource(c(a36)))
+vc24 <- tm_map(vc24, content_transformer(tolower))
+vc24 <- tm_map(vc24, stemDocument)
+vc24 <- tm_map(vc24, removeWords, stopwords("english"))
+dtm24 <- DocumentTermMatrix(vc24)
+x24 <- sum(dtm24)
+y24 <- ncol(dtm24)
+```
+Truman
+```{r}
+vc25 <- VCorpus(VectorSource(c(a41)))
+vc25 <- tm_map(vc25, content_transformer(tolower))
+vc25 <- tm_map(vc25, stemDocument)
+vc25 <- tm_map(vc25, removeWords, stopwords("english"))
+dtm25 <- DocumentTermMatrix(vc25)
+x25 <- sum(dtm25)
+y25 <- ncol(dtm25)
+```
+Eisenhower
+```{r}
+vc26 <- VCorpus(VectorSource(c(a42,a43)))
+vc26 <- tm_map(vc26, content_transformer(tolower))
+vc26 <- tm_map(vc26, stemDocument)
+vc26 <- tm_map(vc26, removeWords, stopwords("english"))
+dtm26 <- DocumentTermMatrix(vc26)
+x26 <- sum(dtm26)/2
+y26 <- ncol(dtm26)/2
+```
+Kennedy
+```{r}
+vc27 <- VCorpus(VectorSource(c(a44)))
+vc27 <- tm_map(vc27, content_transformer(tolower))
+vc27 <- tm_map(vc27, stemDocument)
+vc27 <- tm_map(vc27, removeWords, stopwords("english"))
+dtm27 <- DocumentTermMatrix(vc27)
+x27 <- sum(dtm27)
+y27 <- ncol(dtm27)
+```
+Johnson
+```{r}
+vc28 <- VCorpus(VectorSource(c(a45)))
+vc28 <- tm_map(vc28, content_transformer(tolower))
+vc28 <- tm_map(vc28, stemDocument)
+vc28 <- tm_map(vc28, removeWords, stopwords("english"))
+dtm28 <- DocumentTermMatrix(vc28)
+x28 <- sum(dtm28)
+y28 <- ncol(dtm28)
+```
+Nixon
+```{r}
+vc29 <- VCorpus(VectorSource(c(a46,a47)))
+vc29 <- tm_map(vc29, content_transformer(tolower))
+vc29 <- tm_map(vc29, stemDocument)
+vc29 <- tm_map(vc29, removeWords, stopwords("english"))
+dtm29 <- DocumentTermMatrix(vc29)
+x29 <- sum(dtm29)/2
+y29 <- ncol(dtm29)/2
+```
+Carter
+```{r}
+vc30 <- VCorpus(VectorSource(c(a48)))
+vc30 <- tm_map(vc30, content_transformer(tolower))
+vc30 <- tm_map(vc30, stemDocument)
+vc30 <- tm_map(vc30, removeWords, stopwords("english"))
+dtm30 <- DocumentTermMatrix(vc30)
+x30 <- sum(dtm30)
+y30 <- ncol(dtm30)
+```
+Reagan
+```{r}
+vc31 <- VCorpus(VectorSource(c(a49,a50)))
+vc31 <- tm_map(vc31, content_transformer(tolower))
+vc31 <- tm_map(vc31, stemDocument)
+vc31 <- tm_map(vc31, removeWords, stopwords("english"))
+dtm31 <- DocumentTermMatrix(vc31)
+x31 <- sum(dtm31)/2
+y31 <- ncol(dtm31)/2
+```
+Bush
+```{r}
+vc32 <- VCorpus(VectorSource(c(a51,a54,a55)))
+vc32 <- tm_map(vc32, content_transformer(tolower))
+vc32 <- tm_map(vc32, stemDocument)
+vc32 <- tm_map(vc32, removeWords, stopwords("english"))
+dtm32 <- DocumentTermMatrix(vc32)
+x32 <- sum(dtm32)/3
+y32 <- ncol(dtm32)/3
+```
+Clinton
+```{r}
+vc33 <- VCorpus(VectorSource(c(a52,a53)))
+vc33 <- tm_map(vc33, content_transformer(tolower))
+vc33 <- tm_map(vc33, stemDocument)
+vc33 <- tm_map(vc33, removeWords, stopwords("english"))
+dtm33 <- DocumentTermMatrix(vc33)
+x33 <- sum(dtm33)/2
+y33 <- ncol(dtm33)/2
+```
+Obama
+```{r}
+vc34 <- VCorpus(VectorSource(c(a56,a57)))
+vc34 <- tm_map(vc34, content_transformer(tolower))
+vc34 <- tm_map(vc34, stemDocument)
+vc34 <- tm_map(vc34, removeWords, stopwords("english"))
+dtm34 <- DocumentTermMatrix(vc34)
+x34 <- sum(dtm34)/2
+y34 <- ncol(dtm34)/2
+```
+
+```{r}
+Presidence_name <- c("Washington","Adams","Jefferson","Madison","Monroe","Jackson","VanBuren","Harrison","Polk","Taylor","Pierce","Buchanan","Lincoln","Grant","Hayes","Garfield","Cleveland","Harrison","McKinley","Roosevelt","Talf","Wilson","Harding","Coolidge","Hoover","Truman","Eisenhower","Kennedy","Johnson","Nixon","Carter","Reagan","Bush","Clinton","Obama")
+Total_words <- c(x0,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22,x23,x24,x25,x26,x27,x28,x29,x30,x31,x32,x33,x34)
+Different_words <- c(y0,y1,y2,y3,y4,y5,y6,y7,y8,y9,y10,y11,y12,y13,y14,y15,y16,y17,y18,y19,y20,y21,y22,y23,y24,y25,y26,y27,y28,y29,y30,y31,y32,y33,y34)
+final <- data.frame(Presidence_name,Total_words,Different_words)
+final$Total_words <- round(final$Total_words)
+final$Different_words <- round(final$Different_words)
+print(final)
+```
+
+
+####The Presidence with most words in speaking 
+##Harrison with 3869 words
+
+
+####The Presidence with most different words in speaking 
+##Harrison with 1646 words
+
+
+
